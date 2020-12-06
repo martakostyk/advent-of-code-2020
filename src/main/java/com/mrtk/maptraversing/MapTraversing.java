@@ -14,28 +14,38 @@ public class MapTraversing {
         String path = new File(ReportRepair.class.getResource("/map.txt")
                 .getFile()).getPath();
 
+        List<Slope> slopes = List.of(
+          new Slope(1,1),
+          new Slope(3,1),
+          new Slope(5,1),
+          new Slope(7,1),
+          new Slope(1,2)
+        );
+
         try {
             char[][] map = parseMap(FileReader.read(path));
-            System.out.println(countTrees(map));
+            System.out.println(slopes.stream()
+                    .map(slope -> countTrees(map, slope))
+                    .reduce(1L, (a, b) -> a * b));
         } catch (IOException ex) {
             // TODO
         }
     }
 
-    private static int countTrees(char[][] map) {
+    private static long countTrees(char[][] map, Slope slope) {
         int row = 0;
         int column = 0;
-        int encounteredTrees = 0;
+        long encounteredTrees = 0L;
         while (row < map.length) {
             if (map[row][column] == '#') {
                 encounteredTrees++;
             }
-            if (column < map[0].length - 3) {
-                column = column + 3;
+            if (column < map[0].length - slope.getRight()) {
+                column = column + slope.getRight();
             } else {
-                column = column + 3 - map[0].length;
+                column = column + slope.getRight() - map[0].length;
             }
-            row++;
+            row = row + slope.getDown();
         }
         return encounteredTrees;
     }
