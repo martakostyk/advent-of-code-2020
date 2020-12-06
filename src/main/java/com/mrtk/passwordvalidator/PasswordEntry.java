@@ -2,24 +2,24 @@ package com.mrtk.passwordvalidator;
 
 public class PasswordEntry {
 
-    private final int minOccurrences;
-    private final int maxOccurrences;
+    private final int firstPosition;
+    private final int secondPosition;
     private final char letter;
     private final String password;
 
-    public PasswordEntry(int minOccurrences, int maxOccurrences, char letter, String password) {
-        this.minOccurrences = minOccurrences;
-        this.maxOccurrences = maxOccurrences;
+    public PasswordEntry(int firstPosition, int secondPosition, char letter, String password) {
+        this.firstPosition = firstPosition;
+        this.secondPosition = secondPosition;
         this.letter = letter;
         this.password = password;
     }
 
-    public int getMinOccurrences() {
-        return minOccurrences;
+    public int getFirstPosition() {
+        return firstPosition;
     }
 
-    public int getMaxOccurrences() {
-        return maxOccurrences;
+    public int getSecondPosition() {
+        return secondPosition;
     }
 
     public char getLetter() {
