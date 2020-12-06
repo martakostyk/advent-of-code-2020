@@ -1,5 +1,7 @@
 package com.mrtk.reportrepair;
 
+import com.mrtk.filereader.FileReader;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
@@ -12,7 +14,10 @@ public class ReportRepair {
         String path = new File(ReportRepair.class.getResource("/report.txt")
                 .getFile()).getPath();
         try {
-            int[] report = ReportReader.readReport(path);
+            int[] report = FileReader.read(path)
+                    .stream()
+                    .mapToInt(Integer::parseInt)
+                    .toArray();
             System.out.println(findTwoEntriesAndGetMultiplication(report));
             System.out.println(findThreeEntriesAndGetMultiplication(report));
         } catch (IOException ex) {
